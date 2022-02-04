@@ -1,6 +1,10 @@
 # Crypter
 
 Crypter is a simple js encrypter that use CryptJS library to pass text to encrypt or decrypt
+
+![](crypter.gif)
+
+
 ## How to use
 
 Have simple commands
