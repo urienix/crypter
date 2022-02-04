@@ -4,7 +4,7 @@
     "crypto-js": "^4.1.1",
     "inquirer": "^8.2.0"
   },
-  "name": "crypter",
+  "name": "crypter-text",
   "description": "Crypter is a simple js encrypter that use CryptJS library to pass text to encrypt or decrypt",
   "version": "0.0.2",
   "main": "crypter.js",
