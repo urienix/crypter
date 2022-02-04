@@ -1,7 +1,6 @@
 # Crypter
 
-Crypter is a simple js encrypter that use CryptJS library to pass text to encrypt 
-
+Crypter is a simple js encrypter that use CryptJS library to pass text to encrypt or decrypt
 ## How to use
 
 Have simple commands
@@ -9,14 +8,18 @@ Have simple commands
 ### Encrypt
 You can encrypt text with the next command
 ```bash
-node crypter encrypt 'text that you want to encrypt' keyword
+node crypter encrypt
 ```
+
+And the program will request `text to encrypt` and the `keyword` 
 
 ### Decrypt
 You can decrypt text with the next command
 ```bash
-node crypter decrypt 'Th33ncr1pt3dw0rdth4ty0uw4nttod3crypt' keyword
+node crypter decrypt
 ```
+
+And the program will request `text to decrypt` and the `keyword`
 
 the `keyword` is like a password to decrypt the text, the keyword to decrypt is the same that you use to encrypt the text
 
