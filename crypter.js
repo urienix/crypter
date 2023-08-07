@@ -1,35 +1,76 @@
 const cryptoJS = require('crypto-js');
 const { prompt } = require('inquirer');
 const colors = require('colors');
+const { version } = require('./package.json');
 
-async function encrypt(){
-    try{
+// Constants
+const COMMANDS = {
+    ENCRYPT: 'encrypt',
+    DECRYPT: 'decrypt',
+    HELP: 'help'
+};
+
+const HEADER = ''+
+'______________\n' +
+'< CRYPTER-TEXT >\n' +
+' -------------- \n' +
+'        \\   ^__^\n' +
+'         \\  (oo)\\________\n' +
+'            (__)\\       )\\/\\\n' +
+'                ||----w |\n' +
+'                ||     ||\n\n'+
+'This is a simple text encrypter/decrypter made with Node.js\n';
+
+const USAGE = ''+
+'Usage:' +
+'\n    '+'crypter-text'.green+' <command>'+
+'\n\nCommands:'+
+'\n    '+'encrypt'.green+'    Encrypts a text'+
+'\n    '+'decrypt'.green+'    Decrypts a text'+
+'\n    '+'help'.green+'       Shows this help'+
+'\n';
+
+const MADE_WITH = 'Made with '+'♥'.red+' by '+'urienix'.cyan+'\n';
+
+const VERSION = '' +
+'Version:' +
+'\n    '+version.green+
+'\n';
+
+
+// Functions
+async function encrypt() {
+    try {
         let fields = await insertFields('textword', 'Insert text to encrypt: ');
-        let text = fields.textword;
-        let secret = fields.keyword;
-        let result = cryptoJS.AES.encrypt(text, secret);
+        const { textword: text, keyword: secret } = fields;
+        let result = cryptoJS.AES.encrypt(text.trim(), secret.trim());
         result = result.toString();
-        console.log('Result:'.cyan, result.green);
-    }catch(err){
-        console.log(err);
+        console.log('Encrypted result:'.cyan, result.green);
+    } catch (error) {
+        console.log(error.red);
     }
 }
 
-async function decrypt(){
-    try{
-        let fields = await insertFields('cryptedWord', 'Insert text to decrypt')
-        let text = fields.cryptedWord;
-        let secret = fields.keyword;
-        let result = cryptoJS.AES.decrypt(text, secret);
+async function decrypt() {
+    try {
+        let fields = await insertFields('cryptedWord', 'Insert text to decrypt: ');
+        const { cryptedWord: text, keyword: secret } = fields;
+        let result = cryptoJS.AES.decrypt(text.trim(), secret.trim());
         result = result.toString(cryptoJS.enc.Utf8);
-        if(!result){
-            console.log('Invalid secret key'.red);
-        }else{
-            console.log('Result:'.cyan, result.green);
+        if (!result) {
+            throw new Error('Invalid secret key');
         }
-    }catch(err){
-        console.log('Invalid secret key');
+        console.log('Decrypted result:'.cyan, result.green); 
+    } catch (error) {
+        console.log(error.message.red);
     }
+}
+
+function showHelp() {
+    console.log(HEADER.cyan);
+    console.log(USAGE);
+    console.log(VERSION);
+    console.log(MADE_WITH);
 }
 
 async function insertFields(fieldName, inputMessage){
@@ -53,21 +94,29 @@ async function insertFields(fieldName, inputMessage){
     }
 }
 
-async function main(){
-    let command = process.argv[2];
-    switch(command){
-        case 'encrypt':
-            encrypt();
-            break;
-        case 'decrypt':
-            decrypt();
-            break;
-        case 'help':
-            console.log('SIMPLE WORD ENCRYPTER AND DECRIPTER');
-            console.log('\n\nCommand: >node encrypt [encrypt/decrypt]');
-            break;
-        default:
-            console.log('Command not exist');
+async function main() {
+    try {
+        const command = process.argv[2];
+        if (!command) {
+            throw new Error('Command not supplied');
+        }
+        switch (command) {
+            case COMMANDS.ENCRYPT:
+                encrypt();
+                break;
+            case COMMANDS.DECRYPT:
+                decrypt();
+                break;
+            case COMMANDS.HELP:
+                showHelp();
+                break;
+            default:
+                console.log('Command '.red + command.yellow + ' not found'.red);
+                console.log('Maybe you want to try: '.cyan + 'crypter-text help'.green);
+                break;
+        }
+    } catch (err) {
+        console.error('An error occurred:'.red, err.message);
     }
 }
 

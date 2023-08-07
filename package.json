@@ -5,21 +5,21 @@
     "inquirer": "^8.2.0"
   },
   "name": "crypter-text",
-  "description": "Crypter is a simple js encrypter that use CryptJS library to pass text to encrypt or decrypt",
-  "version": "0.0.2",
+  "description": "Crypter-text is a simple js encrypter that use CryptJS library to pass text to encrypt or decrypt",
+  "version": "1.0.0",
   "main": "crypter.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/urienix/crypter.git"
-  },
+  "repository": "git+https://github.com/urienix/crypter.git",
   "author": "urienix",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/urienix/crypter/issues"
+  },
+  "bin": {
+    "crypter-text": "./bin/crypter-text"
   },
   "homepage": "https://github.com/urienix/crypter#readme",
   "keywords": [
