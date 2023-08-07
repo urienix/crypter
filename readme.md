@@ -5,7 +5,7 @@ Crypter-text is a simple js encrypter that use CryptJS library to pass text to e
 ![](crypter.gif)
 
 
-## Why
+## Why?
 I made a simple encrypter to encrypt text with a keyword, and I use it to encrypt my passwords and save it in a file, so I can decrypt it when I need it. (maybe I should use a password manager, but I like to do it this way)
 
 ## How to install
